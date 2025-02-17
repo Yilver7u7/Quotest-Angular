@@ -12,8 +12,24 @@ export class EmpleadoService {
 
   constructor( private http: HttpClient) {}
 
-  getEmpleado(): Observable<Empleado[]>{
+  getEmpleados(): Observable<Empleado[]> {
     return this.http.get<Empleado[]>(this.apiURL);
+  }
+
+  getEmpleado(id: number): Observable<Empleado> {
+    return this.http.get<Empleado>(`${this.apiURL}/${id}`);
+  }
+
+  createEmpleado(empleado: Empleado): Observable<Empleado> {
+    return this.http.post<Empleado>(this.apiURL, empleado);
+  }
+
+  updateEmpleado(id: number, empleado: Empleado): Observable<Empleado> {
+    return this.http.put<Empleado>(`${this.apiURL}/${id}`, empleado);
+  }
+
+  deleteEmpleado(id: number): Observable<void> {
+    return this.http.delete<void>(`${this.apiURL}/${id}`);
   }
 
 
